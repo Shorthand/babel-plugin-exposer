@@ -1,13 +1,12 @@
-const __exposer__getModule = (() => {
+var __exposer__getModule = function () {
   if (!('$Sh' in window)) window['$Sh'] = {
-    m: {},
-    __exposer__getModule
+    m: {}
   };
-  return name => {
+  return function (name) {
     if (!(name in window['$Sh'].m)) window['$Sh'].m[name] = {};
     return window['$Sh'].m[name];
   };
-})();
+}();
 
 const __exposer__module = __exposer__getModule('example/actual');
 

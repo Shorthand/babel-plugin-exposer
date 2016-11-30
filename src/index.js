@@ -3,9 +3,9 @@ import * as t from 'babel-types';
 import path from 'path';
 import { readFileSync } from 'fs';
 
-const moduleSourceCode = `const __exposer__getModule = (() => {
-  if (!(NAMESPACE in window)) window[NAMESPACE] = { m: {}, __exposer__getModule };
-  return name => {
+const moduleSourceCode = `var __exposer__getModule = (function() {
+  if (!(NAMESPACE in window)) window[NAMESPACE] = {m:{}};
+  return function(name) {
     if (!(name in window[NAMESPACE].m)) window[NAMESPACE].m[name] = {};
     return window[NAMESPACE].m[name];
   }
