@@ -1,7 +1,8 @@
 {
   "plugins": [
     ["../../../src", {
-      "basePath": "./test/fixtures"
+      "basePath": "./test/fixtures",
+      "namespace": "$Sh"
     }]
   ]
 }

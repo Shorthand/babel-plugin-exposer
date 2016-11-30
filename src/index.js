@@ -1,19 +1,24 @@
 import template from 'babel-template';
 import * as t from 'babel-types';
 import path from 'path';
+import { readFileSync } from 'fs';
+
+const moduleSourceCode = `const __exposer__getModule = (() => {
+  if (!(NAMESPACE in window)) window[NAMESPACE] = { m: {}, __exposer__getModule };
+  return name => {
+    if (!(name in window[NAMESPACE].m)) window[NAMESPACE].m[name] = {};
+    return window[NAMESPACE].m[name];
+  }
+})();
+`;
 
 export default function({ types: t }) {
 
   const exposerGetModule = t.identifier('__exposer__getModule');
   const exposerModuleIdentifier = t.identifier('__exposer__module')
 
-  function generateImportExposerModule() {
-    return  t.importDeclaration(
-      [t.importDefaultSpecifier(
-        exposerGetModule,
-      )],
-      t.stringLiteral('module'),
-    );
+  function generateImportExposerModule(namespace) {
+    return template(moduleSourceCode)({ NAMESPACE: t.stringLiteral(namespace) });
   }
 
   function generateInitExposerModule(moduleName) {
@@ -93,9 +98,10 @@ export default function({ types: t }) {
         const basePath = state.opts.basePath;
         const filename = state.file.opts.filename;
         const moduleName = getModuleName(filename, basePath);
+        const namespace = state.opts.namespace;
 
         path.unshiftContainer('body', generateInitExposerModule(moduleName));
-        path.unshiftContainer('body', generateImportExposerModule());
+        path.unshiftContainer('body', generateImportExposerModule(namespace));
       },
 
       /**
