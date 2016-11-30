@@ -66,8 +66,8 @@ export default function({ types: t }) {
   function generateExportedFunction(functionDeclaration) {
     const functionName = functionDeclaration.id;
     return template(`
-      export function NAME() {
-        return EXPOSER.NAME();
+      export function NAME(...args) {
+        return EXPOSER.NAME(args);
       }
     `, { sourceType: 'module' })({
       NAME: functionName,

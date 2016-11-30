@@ -14,8 +14,8 @@ __exposer__module.test = function test() {
   console.log('text');
 };
 
-export function test() {
-  return __exposer__module.test();
+export function test(...args) {
+  return __exposer__module.test(args);
 }
 
 __exposer__module.initTest = function initTest() {
