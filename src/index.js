@@ -75,6 +75,18 @@ export default function({ types: t }) {
     });
   }
 
+  function generateExposedFunctionCall(functionDeclaration) {
+    const functionName = functionDeclaration.id;
+    return template(`
+      function NAME(...args) {
+        return EXPOSER.NAME(args);
+      }
+    `, { sourceType: 'module' })({
+      NAME: functionName,
+      EXPOSER: exposerModuleIdentifier,
+    })
+  }
+
   function generatedDefaultExport(identifier) {
     const memberExpression = getExposedMemberExpression(identifier);
     return t.exportDefaultDeclaration(memberExpression);
@@ -130,11 +142,13 @@ export default function({ types: t }) {
         if (!path.node._isExposed && t.isFunctionDeclaration(declaration)) {
           const exposedFunction = generateExposedFunction(declaration);
           const defaultExport = generatedDefaultExport(declaration.id);
+          const exposedFunctionCall = generateExposedFunctionCall(declaration);
           // prevent recursive visiting on same path
           defaultExport._isExposed = true;
 
           path.replaceWith(exposedFunction);
           path.insertAfter(defaultExport);
+          path.insertAfter(exposedFunctionCall);
         }
       },
 
