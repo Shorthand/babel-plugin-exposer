@@ -34,7 +34,7 @@ window._mystuff.module('my-module/foobar').doStuff = function() {
 }
 
 // call default export (which internally calls the overridden `doStuff`)
-window._mystuff.module('my-module/foobar').hasFoo();
+window._mystuff.module('my-module/foobar').hazFoo();
 // -> I have been monkey-patched!
 </script>
 ```
@@ -66,11 +66,11 @@ You *must* specify a `namespace` and `basePath`.
 
 #### Options
 
-*`namespace`*
+##### `namespace`
 
 This is the property name that will be attached to the window. e.g `window._mystuff`.
 
-*`basePath`*
+##### `basePath`
 
 `basePath` is used to determine module names in the global scope. E.g. if you had a source file in your project called `./src/my-module/foobar.js` and your `basePath` being set to `./src/`: then you can access that module via `window._mystuff.module('my-module/foobar')`.
 
@@ -85,7 +85,7 @@ $ babel --plugins exposer script.js
 
 ```javascript
 require("babel-core").transform("code", {
-  plugins: ["exposer"]
+  plugins: ["exposer", { basePath: './src/', namespace: '__lib' }]
 });
 ```
 
