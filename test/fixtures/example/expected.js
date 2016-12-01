@@ -1,12 +1,15 @@
-var __exposer__getModule = function () {
-  if (!('$Sh' in window)) window['$Sh'] = {
-    m: {}
+var __exposer__getModule = function (s, h) {
+  var module = function (n) {
+    if (!(n in s[h].m)) s[h].m[n] = {};
+    return s[h].m[n];
   };
-  return function (name) {
-    if (!(name in window['$Sh'].m)) window['$Sh'].m[name] = {};
-    return window['$Sh'].m[name];
+
+  if (!(h in s)) s[h] = {
+    m: {},
+    module: module
   };
-}();
+  return module;
+}(window, '$Sh');
 
 const __exposer__module = __exposer__getModule('example/actual');
 

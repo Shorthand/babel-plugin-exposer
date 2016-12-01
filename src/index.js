@@ -3,13 +3,14 @@ import * as t from 'babel-types';
 import path from 'path';
 import { readFileSync } from 'fs';
 
-const moduleSourceCode = `var __exposer__getModule = (function() {
-  if (!(NAMESPACE in window)) window[NAMESPACE] = {m:{}};
-  return function(name) {
-    if (!(name in window[NAMESPACE].m)) window[NAMESPACE].m[name] = {};
-    return window[NAMESPACE].m[name];
-  }
-})();
+const moduleSourceCode = `var __exposer__getModule = (function(s, h) {
+  var module = function(n) {
+    if (!(n in s[h].m)) s[h].m[n] = {};
+    return s[h].m[n];
+  };
+  if (!(h in s)) s[h] = {m:{}, module:module};
+  return module;
+})(window, NAMESPACE);
 `;
 
 export default function({ types: t }) {
