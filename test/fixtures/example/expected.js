@@ -15,7 +15,7 @@ __exposer__module.test = function test() {
 };
 
 export function test(...args) {
-  return __exposer__module.test(args);
+  return __exposer__module.test(...args);
 }
 
 __exposer__module.initTest = function initTest() {
@@ -24,5 +24,5 @@ __exposer__module.initTest = function initTest() {
 };
 
 export default function initTest(...args) {
-  return __exposer__module.initTest(args);
+  return __exposer__module.initTest(...args);
 }

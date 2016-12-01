@@ -67,7 +67,7 @@ export default function({ types: t }) {
     const functionName = functionDeclaration.id;
     return template(`
       export function NAME(...args) {
-        return EXPOSER.NAME(args);
+        return EXPOSER.NAME(...args);
       }
     `, { sourceType: 'module' })({
       NAME: functionName,
@@ -79,7 +79,7 @@ export default function({ types: t }) {
     const functionName = functionDeclaration.id;
     return template(`
       export default function NAME(...args) {
-        return EXPOSER.NAME(args);
+        return EXPOSER.NAME(...args);
       }
     `, { sourceType: 'module' })({
       NAME: functionName,
