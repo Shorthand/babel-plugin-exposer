@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-exposer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Expose modules to global scope for monkey-patch-ability",
   "repository": "Shorthand/babel-plugin-exposer",
   "author": "Andrew Cobby <cobby@shorthand.com>",
