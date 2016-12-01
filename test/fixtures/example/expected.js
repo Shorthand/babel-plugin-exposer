@@ -23,8 +23,6 @@ __exposer__module.initTest = function initTest() {
   test();
 };
 
-function initTest(...args) {
+export default function initTest(...args) {
   return __exposer__module.initTest(args);
 }
-
-export default __exposer__module.initTest;
